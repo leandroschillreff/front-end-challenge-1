@@ -47,26 +47,32 @@ export const CalculateMdrProvider = ({
   const [valueAmount, setValueAmount] = useState<number>(0);
 
   function calculateMdr(data: ICalculateMdr) {
-    const newData = {
-      amount: valueAmount * 100,
-      installments: data.installments,
-      mdr: data.mdr,
-    };
-
-    api
-      .post('/', newData)
-      .then((response) => {
-        setValues(Object.values(response.data));
-      })
-      .catch((error) => {
-        if (error.response.status === 408) {
-          toast.error('Timeout error!', { autoClose: 3000 });
-        } else if (error.response.status === 500) {
-          toast.error('Internal Server Error!', { autoClose: 3000 });
-        } else {
-          toast.error(error.response.data, { autoClose: 3000 });
-        }
+    if (valueAmount > 1000000) {
+      toast.error('Valor de venda não pode ser maior que R$ 1,000,000.00', {
+        autoClose: 3000,
       });
+    } else {
+      const newData = {
+        amount: valueAmount * 100,
+        installments: data.installments,
+        mdr: data.mdr,
+      };
+
+      api
+        .post('/', newData)
+        .then((response) => {
+          setValues(Object.values(response.data));
+        })
+        .catch((error) => {
+          if (error.response.status === 408) {
+            toast.error('Timeout error!', { autoClose: 3000 });
+          } else if (error.response.status === 500) {
+            toast.error('Internal Server Error!', { autoClose: 3000 });
+          } else {
+            toast.error(error.response.data, { autoClose: 3000 });
+          }
+        });
+    }
   }
 
   return (
