@@ -34,3 +34,4 @@ $ yarn test
 
 ## Notes
 
+Small application for calculating MDR values, developed in react for front end challenge 1.
