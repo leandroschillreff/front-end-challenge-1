@@ -22,6 +22,22 @@ export const StyledHomePage = styled.div`
       flex-direction: column;
       width: 100%;
     }
+    .buttonCalculate {
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 20px;
+      border-radius: 4px;
+      color: var(--color-gray-1);
+      border: 2px solid var(--color-gray-3);
+      background: var(--color-white);
+      padding: 10px 10px;
+      cursor: pointer;
+
+      &:hover {
+        border: 2px solid var(--color-blue-3);
+        opacity: 0.8;
+      }
+    }
 
     .resultMdrSection {
       display: flex;

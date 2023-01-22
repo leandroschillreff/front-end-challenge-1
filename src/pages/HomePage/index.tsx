@@ -18,7 +18,13 @@ import { schema } from '../../validators/mdrValues';
 import { StyledHomePage } from './styles';
 
 export const HomePage = () => {
-  const { calculateMdr, values } = useContext(CalculateMdrContext);
+  const {
+    calculateMdr,
+    values,
+    valueAmount,
+    setValueAmount,
+    optionsFormatAmount,
+  } = useContext(CalculateMdrContext);
 
   const {
     register,
@@ -26,11 +32,15 @@ export const HomePage = () => {
     formState: { errors },
   } = useForm<ICalculateMdr>({ resolver: yupResolver(schema) });
 
+  const handleAmount = async (value: string) => {
+    setValueAmount(parseFloat(value) / 100);
+  };
+
   return (
     <Container>
       <StyledHomePage>
         <div className='homeContent'>
-          <Form onChange={handleSubmit(calculateMdr)}>
+          <Form onSubmit={handleSubmit(calculateMdr)}>
             <ThemeText className='' tag='h1' titleSize='title1' color='gray-1'>
               Simule sua Antecipação
             </ThemeText>
@@ -42,6 +52,12 @@ export const HomePage = () => {
               {...register('amount')}
               placeholder='R$ 1000,00'
               borderColor={errors.amount?.message ? 'error' : 'success'}
+              value={new Intl.NumberFormat('pt-BR', optionsFormatAmount).format(
+                valueAmount,
+              )}
+              onChange={(event) =>
+                handleAmount(event.target.value.replace(/\D/g, ''))
+              }
             />
             <ThemeErrorForm>{errors.amount?.message}</ThemeErrorForm>
 
@@ -56,6 +72,7 @@ export const HomePage = () => {
               borderColor={errors.installments?.message ? 'error' : 'success'}
             />
             <ThemeErrorForm>{errors.installments?.message}</ThemeErrorForm>
+
             <ThemeLabel htmlFor='mdr'>Informe o percentual de MDR *</ThemeLabel>
             <ThemeInput
               type='text'
@@ -65,6 +82,10 @@ export const HomePage = () => {
               borderColor={errors.mdr?.message ? 'error' : 'success'}
             />
             <ThemeErrorForm>{errors.mdr?.message}</ThemeErrorForm>
+
+            <button className='buttonCalculate' type='submit'>
+              Calcular MDR
+            </button>
           </Form>
 
           <div className='resultMdrSection'>
