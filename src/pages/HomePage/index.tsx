@@ -8,14 +8,14 @@ import {
   ThemeInput,
   ThemeLabel,
 } from '../../components/Form';
+import { ShowResult } from '../../components/ShowResult';
 import {
   CalculateMdrContext,
   ICalculateMdr,
 } from '../../contexts/CalculateMdrContext';
+import { ThemeText } from '../../styles/typography';
 import { schema } from '../../validators/mdrValues';
 import { StyledHomePage } from './styles';
-import { ThemeText } from '../../styles/typography';
-import { ShowResult } from '../../components/ShowResult';
 
 export const HomePage = () => {
   const { calculateMdr, values } = useContext(CalculateMdrContext);
@@ -65,7 +65,6 @@ export const HomePage = () => {
               borderColor={errors.mdr?.message ? 'error' : 'success'}
             />
             <ThemeErrorForm>{errors.mdr?.message}</ThemeErrorForm>
-            {/* <button type='submit'>Enviar</button> */}
           </Form>
 
           <div className='resultMdrSection'>
@@ -84,7 +83,6 @@ export const HomePage = () => {
               <ShowResult text='Em 90 dias: ' value={values[1]} />
             </div>
           </div>
-          
         </div>
       </StyledHomePage>
     </Container>

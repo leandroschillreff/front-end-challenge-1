@@ -23,6 +23,7 @@ export const CalculateMdrProvider = ({
   children,
 }: ICalculateMdrProviderProps) => {
   const [values, setValues] = useState<number[]>([]);
+
   function calculateMdr(data: ICalculateMdr) {
     const newData = {
       amount: data.amount * 100,

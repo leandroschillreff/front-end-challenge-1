@@ -5,10 +5,7 @@ export const Form = styled.form`
   flex-direction: column;
   width: 70%;
   justify-content: center;
-  /* min-width: 100%;
-  max-width: 500px; */
   padding: 2.5rem 3.4em;
-  /* border-radius: 20px; */
   background: var(--color-white);
   gap: 0.5rem;
   @media (max-width: 760px) {
@@ -51,16 +48,16 @@ export const ThemeInput = styled.input<IThemeInputProps>`
   color: var(--color-black);
   padding: 5px 15px;
   background: var(--color-white);
-  /* border: 2px solid var(--color-gray-3); */  
+
   border-radius: 4px;
-  /* &:focus {
+  &:focus {
     outline: 0;
     border: 2px solid var(--color-blue-3);
   }
 
   &:hover {
     border: 2px solid var(--color-blue-3);
-  } */
+  }
 
   ${(props) => {
     switch (props.borderColor) {
