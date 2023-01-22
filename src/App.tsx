@@ -1,11 +1,16 @@
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import GlobalProvider from './contexts';
+import { RoutesMain } from './routes';
+import { GlobalStyle } from './styles/global';
 
 function App() {
   return (
-    <div>
-      <header>
-        <h1>Olá apenas teste</h1>
-      </header>
-    </div>
+    <GlobalProvider>
+      <GlobalStyle />
+      <ToastContainer />
+      <RoutesMain />
+    </GlobalProvider>
   );
 }
 
